@@ -11,7 +11,7 @@ URL: %{url_prefix}/%{name}
 
 BuildArch: noarch
 BuildRequires: nethserver-devtools
-Requires: cifs-utils, nfs-utils, duplicity, davfs2
+Requires: cifs-utils, nfs-utils
 Requires: nethserver-backup-config
 Requires: sshpass
 Requires: restic
@@ -40,7 +40,7 @@ mv -v NethServer root%{perl_vendorlib}
 rm -rf %{buildroot}
 (cd root ; find . -depth -print | cpio -dump %{buildroot})
 mkdir -p %{buildroot}/usr/bin
-mv %{SOURCE1} %{buildroot}/usr/bin/rsync_tmbackup
+cp %{SOURCE1} %{buildroot}/usr/bin/rsync_tmbackup
 echo %{rsync_release} > RESTIC-RELEASE
 %{genfilelist} --file /usr/bin/rsync_tmbackup 'attr(0755,root,root)'  %{buildroot} > %{name}-%{version}-%{release}-filelist
 
